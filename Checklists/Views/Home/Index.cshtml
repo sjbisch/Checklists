@@ -1,0 +1,40 @@
+﻿@model Checklists.Models.OwnedChecklistVM
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    @using(Ajax.BeginForm("GetOwnedChecklist", new AjaxOptions { UpdateTargetId = "checklist" }))
+    {
+        @Html.DropDownList("ownerId", Model.Owners, "- select person -")
+        @Html.DropDownList("checklistId", Model.Checklists, "- select checklist - ")
+        <input id="checklistSelect" type="submit" value="Submit" />
+    }
+
+
+
+</div>
+<div id="checklist"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" >
+        $(function () {
+            $("#ownerId").change(updateChecklist);
+            $("#checklistId").change(updateChecklist);
+        })
+
+        function updateChecklist() {
+            var button = $("#checklistSelect")
+            var ownerId = $("#ownerId").val();
+            var checklistId = $("#checklistId").val();
+
+            if (ownerId != ""  && checklistId != "") {
+                button.click();
+            }
+        }
+    </script>
+}
+

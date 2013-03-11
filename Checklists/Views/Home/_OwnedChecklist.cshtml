@@ -1,0 +1,19 @@
+﻿@model Checklists.Models.OwnedChecklistVM
+
+<div>
+
+
+    @using(Ajax.BeginForm("UpdateOwnedChecklist", new AjaxOptions { UpdateTargetId = "checklist" }))
+    {
+        @Html.HiddenFor(m => m.Checklist.Id)
+        @Html.HiddenFor(m => m.Owner.Id)
+        for(int index = 0; index < Model.Checklist.Items.Count; index++)
+        {
+            @Html.Hidden("Checklist.Items[" + index + "].Id", Model.Checklist.Items.ToArray()[index].Id )
+            <div>@Html.CheckBox("Checklist.Items[" + index + "].isChecked", Model.Checklist.Items.ToArray()[index].isChecked )  @Model.Checklist.Items.ToArray()[index].Description</div>
+        }
+        
+        <input type="submit" value="Save" />
+        
+    }
+</div>

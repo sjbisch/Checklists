@@ -1,0 +1,35 @@
+﻿@model Checklists.Models.Checklist
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Checklist</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+        Items
+    </div>
+
+    @foreach (Checklists.Models.ChecklistItem item in Model.Items)
+    {
+        <div class="display-field">
+            @item.Description
+        </div>
+    }
+
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
