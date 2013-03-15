@@ -754,7 +754,13 @@ tr.pager td {
             margin: 0;
         }
 
+
+}
+
     #checklist {
         font-size: 1.2em;
     }
-}
+
+    .threeDigitBox     {
+        width: 40px;
+    }

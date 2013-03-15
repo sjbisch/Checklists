@@ -7,13 +7,15 @@
     {
         @Html.HiddenFor(m => m.Checklist.Id)
         @Html.HiddenFor(m => m.Owner.Id)
+        <div>@Html.TextBoxFor(m => m.Owner.Credits, new { @class="threeDigitBox" }) Credits Earned</div>
+        <div>@Model.Checklist.RequiredCredits Credits Required</div>        
         for(int index = 0; index < Model.Checklist.Items.Count; index++)
         {
             @Html.Hidden("Checklist.Items[" + index + "].Id", Model.Checklist.Items.ToArray()[index].Id )
             <div>@Html.CheckBox("Checklist.Items[" + index + "].isChecked", Model.Checklist.Items.ToArray()[index].isChecked )  @Model.Checklist.Items.ToArray()[index].Description</div>
-        }
-        
-        <input type="submit" value="Save" />
-        
+        }        
+        <input type="submit" value="Save" />        
     }
+    
+    @Html.ActionLink("Report View", "ShowReport", new { ownerId = Model.Owner.Id, checklistId = Model.Checklist.Id })
 </div>

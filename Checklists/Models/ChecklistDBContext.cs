@@ -44,7 +44,7 @@ namespace Checklists.Models
 
             List<Owner> owners = new List<Owner>
             {
-                new Owner { Name = "Becky" },
+                new Owner { Name = "Becky", CheckedItems= new List<ChecklistItem>() },
                 new Owner { Name = "Buck" },
                 new Owner { Name = "Brad" },
                 new Owner { Name = "Bingo" },

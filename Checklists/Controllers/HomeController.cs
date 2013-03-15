@@ -47,14 +47,11 @@ namespace Checklists.Controllers
 
             return PartialView("_OwnedChecklist", model);
         }
-
-
-
-
-
+        
         public ActionResult UpdateOwnedChecklist(OwnedChecklistVM model)
         {
             Owner updatedOwner = db.Owners.Find(model.Owner.Id);
+            updatedOwner.Credits = model.Owner.Credits;
 
             List<ChecklistItem> dbItems = db.Checklists.Find(model.Checklist.Id).Items.ToList();
 
@@ -75,18 +72,20 @@ namespace Checklists.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ShowReport(int ownerId, int checklistId)
         {
-            ViewBag.Message = "Your app description page.";
+            OwnedChecklistVM model = new OwnedChecklistVM();
 
-            return View();
-        }
+            model.Owner = db.Owners.Find(ownerId);
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            model.Checklist = db.Checklists.Find(checklistId);
 
-            return View();
+            foreach (ChecklistItem item in model.Checklist.Items)
+            {
+                item.isChecked = model.Owner.CheckedItems.Contains(item);
+            }
+
+            return View(model);
         }
     }
 }

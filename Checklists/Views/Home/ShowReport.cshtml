@@ -1,0 +1,29 @@
+﻿@model Checklists.Models.OwnedChecklistVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Degree Progress for @Model.Owner.Name</title>
+</head>
+<body>
+    <div>
+        <h1>Degree Progress for @Model.Owner.Name</h1>
+
+
+        <div>@Model.Owner.Credits Credits Earned</div>
+        <div>@Model.Checklist.RequiredCredits Credits Required</div>        
+        @for(int index = 0; index < Model.Checklist.Items.Count; index++)
+        {
+            @Html.Hidden("Checklist.Items[" + index + "].Id", Model.Checklist.Items.ToArray()[index].Id )
+            <div>@Html.CheckBox("Checklist.Items[" + index + "].isChecked", Model.Checklist.Items.ToArray()[index].isChecked )  @Model.Checklist.Items.ToArray()[index].Description</div>
+        }        
+
+    </div>
+</body>
+</html>
